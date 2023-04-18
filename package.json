@@ -1,0 +1,20 @@
+{
+  "name": "consoleload",
+  "version": "1.0.0",
+  "description": "A fully customizable loading animation package for your Console Logs.",
+  "main": "./src/index.js",
+  "scripts": {
+    "test": "node ./test/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git repo"
+  },
+  "keywords": [
+    "loading",
+    "animation",
+    "customisable"
+  ],
+  "author": "ReXulEc",
+  "license": "ISC"
+}
