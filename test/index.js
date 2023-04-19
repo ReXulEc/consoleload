@@ -1,6 +1,6 @@
 const cload = require('../src/index.js')
 
-cload.log("basicspin" , "uras")
+cload.log("Hello World!", "basicspin")
 
 setInterval(() => {
     cload.stop()

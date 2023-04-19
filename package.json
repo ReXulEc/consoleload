@@ -16,5 +16,8 @@
     "customisable"
   ],
   "author": "ReXulEc",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "consola": "^3.1.0"
+  }
 }

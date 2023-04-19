@@ -1,42 +1,49 @@
 const fs = require('fs');
+const { consola } = require("consola");
+const animateLoader = require('../src/loader.js');
 
 let loader;
 let animations = 0
+let animationCount = 0
+let totalAnimations = 0
+const defobj = JSON.parse(fs.readFileSync(`./lib/basicspin.json`, 'utf8'));
 
-async function log(animation, text) {
+async function log(text, animation) {
+    if(!animation) animation = "basicspin"
     fs.readdir('./lib', (err, files) => {
         if (err) {
             console.error(err);
             return;
         }
 
-        // Dosyaları döngüye sok
+        // Looping the files
         for (const file of files) {
-            // Sadece JSON dosyalarını işle
+            // Checking if the file is a JSON file
             if (file.endsWith('.json')) {
                 const data = fs.readFileSync(`./lib/${file}`, 'utf8');
                 const obj = JSON.parse(data);
 
-                // Eğer objenin name değeri "test" ise, x değerini yazdır
                 if (obj.name === animation) {
-                    let x = 0;
-                    loader = setInterval(() => {
-                        process.stdout.clearLine()
-                        process.stdout.cursorTo(animations)
-
-                        process.stdout.write(`\r${obj.frames[x++]} ${text}`);
-                        x %= obj.frames.length;
-                    }, 1000 / obj.framepersecond);
-
-                    break; // İşlemi durdur
+                    animateLoader.loader(obj, text, obj.framepersecond)
+                    totalAnimations++
+                } if(obj.name != animation) {
+                    animationCount++
+                    totalAnimations++
                 }
             }
+        }
+        if (animationCount === totalAnimations) {
+            consola.error(new Error(`"${animation}" animation not found! To avoid this error, you can use a valid animation name. Will use default animation.`));
+            animateLoader.loader(defobj, text, defobj.framepersecond)
+           /*
+           animation = "basicspin"
+           */
         }
     });
 }
 
 function stop() {
-    clearInterval(loader);
+    animateLoader.stop()
 }
 
 module.exports = { log, stop }
