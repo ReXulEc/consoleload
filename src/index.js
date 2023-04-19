@@ -1,49 +1,41 @@
-const fs = require('fs');
-const { consola } = require("consola");
-const animateLoader = require('../src/loader.js');
+const fs = require("node:fs");
+const loader = require("./loader.js");
 
-let loader;
-let animations = 0
-let animationCount = 0
-let totalAnimations = 0
-const defobj = JSON.parse(fs.readFileSync(`./lib/basicspin.json`, 'utf8'));
+const animations = fs
+  .readdirSync("./lib/")
+  .map((animation) =>
+    JSON.parse(fs.readFileSync(`./lib/${animation}`, "utf-8"))
+  )
+  .reduce((animations, animation) => {
+    animations[animation.name] = animation;
+    return animations;
+  }, {});
 
-async function log(text, animation) {
-    if(!animation) animation = "basicspin"
-    fs.readdir('./lib', (err, files) => {
-        if (err) {
-            console.error(err);
-            return;
-        }
+/**
+ * @type {?NodeJS.Timeout}
+ */
+let loaded;
 
-        // Looping the files
-        for (const file of files) {
-            // Checking if the file is a JSON file
-            if (file.endsWith('.json')) {
-                const data = fs.readFileSync(`./lib/${file}`, 'utf8');
-                const obj = JSON.parse(data);
+module.exports = (text, animation) => {
+  const _animation =
+    typeof animation === "object" ? animation : animations[animation];
 
-                if (obj.name === animation) {
-                    animateLoader.loader(obj, text, obj.framepersecond)
-                    totalAnimations++
-                } if(obj.name != animation) {
-                    animationCount++
-                    totalAnimations++
-                }
-            }
-        }
-        if (animationCount === totalAnimations) {
-            consola.error(new Error(`"${animation}" animation not found! To avoid this error, you can use a valid animation name. Will use default animation.`));
-            animateLoader.loader(defobj, text, defobj.framepersecond)
-           /*
-           animation = "basicspin"
-           */
-        }
-    });
-}
+  if (!_animation) {
+    throw new Error("Invalid animation");
+  }
 
-function stop() {
-    animateLoader.stop()
-}
+  if (loaded) {
+    clearInterval(loaded);
+    console.log("\r");
+  }
 
-module.exports = { log, stop }
+  loaded = loader(_animation, text);
+
+  return {
+    stop: () => {
+      clearInterval(loaded);
+      loaded = null;
+      return true;
+    },
+  };
+};

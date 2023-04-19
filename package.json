@@ -3,12 +3,13 @@
   "version": "1.0.0",
   "description": "A fully customizable loading animation package for your Console Logs.",
   "main": "./src/index.js",
+  "types": "./types/index.d.ts",
   "scripts": {
     "test": "node ./test/index.js"
   },
   "repository": {
     "type": "git",
-    "url": "git repo"
+    "url": "https://github.com/ReXulEc/consoleload"
   },
   "keywords": [
     "loading",
@@ -16,8 +17,5 @@
     "customisable"
   ],
   "author": "ReXulEc",
-  "license": "ISC",
-  "dependencies": {
-    "consola": "^3.1.0"
-  }
+  "license": "ISC"
 }

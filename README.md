@@ -11,14 +11,11 @@ npm install consoleload
 ## Usage
 
 ```js
-const cload = require('../src/index.js')
+const cload = require("consoleload");
 
-cload.log("Hello World!")
-// Or you can define an animation
-cload.log("Hello World!", "basicspin")
+const log = cload("Hello World!", "basicspin");
 
-//... code
-cload.stop()
+setTimeout(() => {
+  cload.stop();
+}, 3000);
 ```
-
-## PREVİEW DEMO. DO NOT USE NOW.

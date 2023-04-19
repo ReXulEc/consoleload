@@ -1,12 +1,6 @@
 {
-    "name": "basicspin",
-    "author": "Mert Dogu",
-    "version": "1.0.0",
-    "framepersecond": 5,
-    "frames": [
-        "-",
-        "\\",
-        "|",
-        "/"
-    ]
+  "name": "basicspin",
+  "author": "Mert Dogu",
+  "fps": 5,
+  "frames": ["-", "\\", "|", "/"]
 }

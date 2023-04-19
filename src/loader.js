@@ -1,15 +1,16 @@
-let loaderconst;
+/**
+ *
+ * @param {Object} animation
+ * @param {string} text
+ */
+module.exports = (animation, text) => {
+  let frames = 0;
 
-function loader(obj, text, fps){
-    let x = 0;
-    loaderconst = setInterval(() => {
-        process.stdout.write(`\r${obj.frames[x++]} ${text}`);
-        x %= obj.frames.length;
-    }, 1000 / fps);
-}
+  const interval = setInterval(() => {
+    process.stdout.write(`\r${animation.frames[frames++]} ${text}`);
 
-function stop(){
-    clearInterval(loaderconst);
-}
+    frames %= animation.frames.length;
+  }, 1000 / animation.fps);
 
-module.exports = {loader, stop};
+  return interval;
+};
