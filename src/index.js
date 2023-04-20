@@ -16,18 +16,28 @@ const animations = fs
  */
 let loaded;
 
-module.exports = (text, animation) => {
+module.exports = (text, animation = "basicspin", customfps = undefined) => {
   const _animation =
     typeof animation === "object" ? animation : animations[animation];
 
   if (!_animation) {
     throw new Error("Invalid animation");
   }
+  
+  let deffps = _animation.fps;
 
   if (loaded) {
     clearInterval(loaded);
     console.log("\r");
   }
+
+
+  if (customfps) {
+    _animation.fps = customfps;
+  }
+
+  // for testing the animation object
+  // console.log(_animation)
 
   loaded = loader(_animation, text);
 
@@ -35,6 +45,7 @@ module.exports = (text, animation) => {
     stop: () => {
       clearInterval(loaded);
       loaded = null;
+      _animation.fps = deffps;
       return true;
     },
   };
