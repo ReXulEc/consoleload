@@ -6,6 +6,7 @@ const { setTimeout: sleep } = require("node:timers/promises");
 (async () => {
   let log = cload("Fetching user...", "basicspin");
   await sleep(2000);
+
   let log2 = cload("Fetching data...", "basicspin");
   await sleep(2000);
   log2.stop();
@@ -24,21 +25,23 @@ const { setTimeout: sleep } = require("node:timers/promises");
 })();
 */
 
-/* Custom animation
+// Custom animation
 
 (async () => {
   const MyAnimation = {
     fps: 5,
     frames: [
+      "/",
       "-",
-      "."
+      "\\",
+      "-"
     ],
   }
-  let log = cload("Loading with custom animation...", MyAnimation);
-  await sleep(2000);
+  let log = cload("Loading with custom animation with 5fps and 5 space..", MyAnimation, null, 5);
+  await sleep(5000);
   log.stop();
 })();
-*/
+//
 
 /* Preset animation with custom fps
 

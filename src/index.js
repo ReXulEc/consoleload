@@ -16,7 +16,7 @@ const animations = fs
  */
 let loaded;
 
-module.exports = (text, animation = "basicspin", customfps = undefined) => {
+module.exports = (text, animation = "basicspin", fps, space) => {
   const _animation =
     typeof animation === "object" ? animation : animations[animation];
 
@@ -30,11 +30,13 @@ module.exports = (text, animation = "basicspin", customfps = undefined) => {
     clearInterval(loaded);
     console.log("\r");
   }
-
-
-  if (customfps) {
-    _animation.fps = customfps;
+  if (fps) {
+    _animation.fps = fps;
   }
+  if (space) {
+    _animation.space = space;
+  }
+
 
   // for testing the animation object
   // console.log(_animation)
@@ -46,6 +48,7 @@ module.exports = (text, animation = "basicspin", customfps = undefined) => {
       clearInterval(loaded);
       loaded = null;
       _animation.fps = deffps;
+      delete _animation.space
       return true;
     },
   };
