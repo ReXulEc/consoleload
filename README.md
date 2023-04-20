@@ -1,6 +1,23 @@
-# consoleload
-
-A fully customizable loading animation package for your Console Logs.
+<div align="center">
+  <h1>consoleload</h1>
+  <span class="badge-npmversion">
+    <a href="https://npmjs.org/package/consoleload" title="View this project on NPM">
+      <img src="https://img.shields.io/npm/v/consoleload.svg" alt="NPM version" />
+    </a>
+  </span>
+  <span class="badge-npmdownloads">
+    <a href="https://npmjs.org/package/consoleload" title="View this project on NPM">
+      <img src="https://img.shields.io/npm/dm/consoleload.svg" alt="NPM downloads" />
+    </a>
+  </span>
+  <span class="badge-githubsponsors">
+    <a href="https://github.com/sponsors/rexulec" title="Donate to this project using GitHub Sponsors">
+      <img src="https://img.shields.io/badge/github-donate-yellow.svg" alt="GitHub Sponsors donate button" />
+    </a>
+  </span>
+  <br class="badge-separator" />
+  <p>A fully customizable loading animation package for your Console Logs.</p>
+</div>
 
 ## Installation
 
