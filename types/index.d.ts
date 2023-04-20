@@ -1,4 +1,4 @@
-type Animation = "basicspin" | "plusminus";
+type Animation = "basicspin" | "plusminus" | "moon" | "weather";
 
 interface CustomAnimation {
   /**
@@ -32,7 +32,8 @@ declare module "consoleload" {
    */
   export default function (
     text: string,
-    animation: Animation | CustomAnimation
+    animation: Animation | CustomAnimation,
+    fps?: number
   ): {
     stop: () => true;
   };
