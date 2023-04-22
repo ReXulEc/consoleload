@@ -1,10 +1,23 @@
 const fs = require("node:fs");
 const loader = require("./loader.js");
+const { fileURLToPath } = require("node:url");
+const { dirname, join, resolve } = require("node:path");
+
+/**
+ * @type {string}
+ */
+let libPath;
+
+try {
+  libPath = join(__dirname, "lib");
+} catch {
+  libPath = join(dirname(fileURLToPath(import.meta.url)), "lib");
+}
 
 const animations = fs
-  .readdirSync("./lib/")
+  .readdirSync(libPath)
   .map((animation) =>
-    JSON.parse(fs.readFileSync(`./lib/${animation}`, "utf-8"))
+    JSON.parse(fs.readFileSync(resolve(libPath, animation), "utf-8"))
   )
   .reduce((animations, animation) => {
     animations[animation.name] = animation;
